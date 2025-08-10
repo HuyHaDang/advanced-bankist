@@ -110,3 +110,23 @@ const h1 = document.querySelector(`h1`);
 console.log(h1);
 console.log(h1.querySelectorAll(`.highlight`));
 console.log(h1.childNodes);
+
+//TAB COMPONENT
+const tabs = document.querySelectorAll(`.operations__tab`);
+const tabsContainer = document.querySelector(`.operations__tab-container`);
+const tabsContent = document.querySelectorAll(`.operations__content`);
+tabsContainer.addEventListener(`click`, function (e) {
+  const clicked = e.target.closest(`.operations__tab`);
+  // Deactivate all tabs and content first
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  // Guard clause
+  if (!clicked) return;
+  // console.log(clicked);
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+  // Activate the clicked tab
+  clicked.classList.add('operations__tab--active');
+  // Activate the corresponding content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add(`operations__content--active`);
+});
