@@ -73,7 +73,7 @@ document
 const btnScrollTo = document.querySelector(`.btn--scroll-to`);
 const section1 = document.querySelector(`#section--1`);
 btnScrollTo.addEventListener(`click`, function (e) {
-  const s1coords = section1.getBoundingClientRect();
+  // const s1coords = section1.getBoundingClientRect();
   // window.scrollTo(
   //   s1coords.x + window.pageXOffset,
   //   s1coords.y + window.pageYOffset
@@ -83,3 +83,30 @@ btnScrollTo.addEventListener(`click`, function (e) {
 
   section1.scrollIntoView({ behavior: `smooth` });
 });
+
+//Page Navigation
+//METHOD 1
+// document.querySelectorAll(`.nav__link`).forEach(function (el) {
+//   el.addEventListener(`click`, function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute(`href`);
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: `smooth` });
+//   });
+// });
+
+//METHOD 2
+document.querySelector(`.nav__links`).addEventListener(`click`, function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains(`nav__link`)) {
+    console.log(e.target);
+    const id = e.target.getAttribute(`href`);
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: `smooth` });
+  }
+});
+
+const h1 = document.querySelector(`h1`);
+console.log(h1);
+console.log(h1.querySelectorAll(`.highlight`));
+console.log(h1.childNodes);
