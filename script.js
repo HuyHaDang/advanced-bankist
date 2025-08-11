@@ -156,7 +156,8 @@ nav.addEventListener(`mouseout`, handleHover.bind(1));
 /////////////////////////////////////////
 //sticky navigation
 //METHOD 1
-const navHeight = document.querySelector(`.header`).height;
+// const navHeight = document.querySelector(`.header`);
+const navHeight = nav.getBoundingClientRect().height;
 const stickyNav = function (entries) {
   const [entry] = entries;
   if (!entry.isIntersecting) {
@@ -174,3 +175,10 @@ const headerObserve = new IntersectionObserver(stickyNav, {
 headerObserve.observe(header);
 
 // METHOD 2
+
+// const initialCoords = section1.getBoundingClientRect();
+// window.addEventListener(`scroll`, function () {
+//   console.log(window.scrollY);
+//   if (window.scrollY >= initialCoords.top) nav.classList.add(`sticky`);
+//   else nav.classList.add(`sticky`);
+// });
