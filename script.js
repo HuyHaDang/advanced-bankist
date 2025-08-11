@@ -84,6 +84,7 @@ btnScrollTo.addEventListener(`click`, function (e) {
   section1.scrollIntoView({ behavior: `smooth` });
 });
 
+////////////////////////////
 //Page Navigation
 //METHOD 1
 // document.querySelectorAll(`.nav__link`).forEach(function (el) {
@@ -151,3 +152,25 @@ const nav = document.querySelector(`.nav`);
 //passing argument to functions
 nav.addEventListener(`mouseover`, handleHover.bind(0.5));
 nav.addEventListener(`mouseout`, handleHover.bind(1));
+
+/////////////////////////////////////////
+//sticky navigation
+//METHOD 1
+const navHeight = document.querySelector(`.header`).height;
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+};
+
+const headerObserve = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserve.observe(header);
+
+// METHOD 2
