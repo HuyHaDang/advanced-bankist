@@ -272,23 +272,23 @@ slides.forEach(function (_, i) {
 });
 
 // MY OWN METHOD
-dotContainer.addEventListener(`click`, function (e) {
-  if (e.target.classList.contains(`dots__dot`)) {
-    let x = -e.target.dataset.slide;
-    e.target.classList.add(`dots__dot--active`);
-    slides.forEach(
-      (s, i) => (s.style.transform = `translateX(${(x + i) * 100}%)`)
-    );
-  }
-});
-
-//MY MENTOR METHOD
 // dotContainer.addEventListener(`click`, function (e) {
 //   if (e.target.classList.contains(`dots__dot`)) {
-//     const { slide } = e.target.dataset;
+//     let x = -e.target.dataset.slide;
+//     e.target.classList.add(`dots__dot--active`);
 //     slides.forEach(
-//       (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+//       (s, i) => (s.style.transform = `translateX(${(x + i) * 100}%)`)
 //     );
-//     // activateDot(slide);
 //   }
 // });
+
+// MY MENTOR METHOD
+dotContainer.addEventListener(`click`, function (e) {
+  if (e.target.classList.contains(`dots__dot`)) {
+    const { slide } = e.target.dataset;
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+    // activateDot(slide);
+  }
+});
