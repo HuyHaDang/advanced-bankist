@@ -34,13 +34,13 @@ document.addEventListener('keydown', function (e) {
 // Selecting, Creating, and Deleting Elements
 
 // Selecting elements
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
 
 const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
-console.log(allSections);
+// console.log(allSections);
 
 document.getElementById('section--1');
 const allButtons = document.getElementsByTagName('button');
@@ -182,3 +182,23 @@ headerObserve.observe(header);
 //   if (window.scrollY >= initialCoords.top) nav.classList.add(`sticky`);
 //   else nav.classList.add(`sticky`);
 // });
+
+//REVEAL SECTIONS
+const revealSection = function (entries, observe) {
+  const [entry] = entries;
+  // console.log(entries);
+  // console.log(entry);
+  if (entry.isIntersecting === false) return;
+  entry.target.classList.remove(`section--hidden`);
+  console.log(entry.target);
+  observe.unobserve(entry.target);
+};
+const sectionObsserve = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach(function (section) {
+  sectionObsserve.observe(section);
+  section.classList.add(`section--hidden`);
+});
