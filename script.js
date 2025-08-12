@@ -170,7 +170,7 @@ const stickyNav = function (entries) {
 
 const headerObserve = new IntersectionObserver(stickyNav, {
   root: null,
-  // threshold: 0,
+  threshold: 0,
   rootMargin: `-${navHeight}px`,
 });
 headerObserve.observe(header);
@@ -200,7 +200,7 @@ const sectionObsserve = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObsserve.observe(section);
-  section.classList.add(`section--hidden`);
+  // section.classList.add(`section--hidden`);
 });
 
 //LAZY LOAD IMAGE
@@ -223,3 +223,72 @@ const imgObserver = new IntersectionObserver(loadImg, {
   rootMargin: `-200px`,
 });
 imgTargets.forEach(img => imgObserver.observe(img));
+
+//SLIDER
+const slides = document.querySelectorAll(`.slide`);
+slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`)); //consecutive arrangement
+const btnRight = document.querySelector(`.slider__btn--right`);
+let curSlide = 0;
+
+// // ACTIVATE DOT CHANGE
+// const activateDot = function (slide) {
+//   document
+//     .querySelectorAll(`.dots__dot`)
+//     .forEach(dot => dot.classList.remove(`dots__dot--active`));
+//   document
+//     .querySelector(`.dots__dot[data-slide="${slide}"]`)
+//     .classList.add(`dots__dot--active`);
+// };
+
+//GO TO NEXT SLIDE
+btnRight.addEventListener(`click`, function () {
+  if (curSlide === 2) {
+    curSlide = 0;
+  } else ++curSlide;
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
+  );
+  // activateDot(curSlide);
+});
+
+const btnLeft = document.querySelector(`.slider__btn--left`);
+btnLeft.addEventListener(`click`, function () {
+  if (curSlide === 0) {
+    curSlide = 2;
+  } else --curSlide;
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
+  );
+  // activateDot(curSlide);
+});
+
+//DOT TO CHANGE SLIDE
+// const dotContainer = document.querySelector(`.dots`);
+// slides.forEach(function (_, i) {
+//   dotContainer.insertAdjacentHTML(
+//     `beforeend`,
+//     `<button class="dots__dot" data-slide="${i}"></button>`
+//   );
+// });
+
+//MY OWN METHOD
+// dotContainer.addEventListener(`click`, function (e) {
+//   if (e.target.classList.contains(`dots__dot`)) {
+//     let x = -e.target.dataset.slide;
+//     e.target.classList.add(`dots__dot--active`);
+//     slides.forEach(
+//       (s, i) => (s.style.transform = `translateX(${(x + i) * 100}%)`)
+//     );
+//   }
+// });
+
+//MY MENTOR METHOD
+// dotContainer.addEventListener(`click`, function (e) {
+//   if (e.target.classList.contains(`dots__dot`)) {
+//     const { slide } = e.target.dataset;
+//     slides.forEach(
+//       (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+//     );
+//     // activateDot(slide);
+//   }
+// });
