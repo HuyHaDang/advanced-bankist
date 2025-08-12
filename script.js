@@ -262,25 +262,25 @@ btnLeft.addEventListener(`click`, function () {
   // activateDot(curSlide);
 });
 
-//DOT TO CHANGE SLIDE
-// const dotContainer = document.querySelector(`.dots`);
-// slides.forEach(function (_, i) {
-//   dotContainer.insertAdjacentHTML(
-//     `beforeend`,
-//     `<button class="dots__dot" data-slide="${i}"></button>`
-//   );
-// });
+// DOT TO CHANGE SLIDE
+const dotContainer = document.querySelector(`.dots`);
+slides.forEach(function (_, i) {
+  dotContainer.insertAdjacentHTML(
+    `beforeend`,
+    `<button class="dots__dot" data-slide="${i}"></button>`
+  );
+});
 
-//MY OWN METHOD
-// dotContainer.addEventListener(`click`, function (e) {
-//   if (e.target.classList.contains(`dots__dot`)) {
-//     let x = -e.target.dataset.slide;
-//     e.target.classList.add(`dots__dot--active`);
-//     slides.forEach(
-//       (s, i) => (s.style.transform = `translateX(${(x + i) * 100}%)`)
-//     );
-//   }
-// });
+// MY OWN METHOD
+dotContainer.addEventListener(`click`, function (e) {
+  if (e.target.classList.contains(`dots__dot`)) {
+    let x = -e.target.dataset.slide;
+    e.target.classList.add(`dots__dot--active`);
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${(x + i) * 100}%)`)
+    );
+  }
+});
 
 //MY MENTOR METHOD
 // dotContainer.addEventListener(`click`, function (e) {
